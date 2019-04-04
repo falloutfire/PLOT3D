@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="560.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manny.plotting.Controller.MainLayoutController">
+   <children>
+      <TabPane prefHeight="560.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="diameterField" layoutX="14.0" layoutY="33.0" text="1" />
+                        <TextField fx:id="lengthField" layoutX="14.0" layoutY="80.0" text="300" />
+                        <TextField fx:id="rateField" layoutX="14.0" layoutY="125.0" text="1000" />
+                        <TextField fx:id="tempField" layoutX="14.0" layoutY="173.0" text="200" />
+                        <TextField fx:id="concAField" layoutX="14.0" layoutY="221.0" text="1" />
+                        <TextField fx:id="concBField" layoutX="470.0" layoutY="29.0" text="1" />
+                        <TextField fx:id="k1Field" layoutX="470.0" layoutY="77.0" text="5530" />
+                        <TextField fx:id="k2Field" layoutX="470.0" layoutY="124.0" text="20000000000000" />
+                        <TextField fx:id="activ1Field" layoutX="470.0" layoutY="175.0" text="48650" />
+                        <TextField fx:id="activ2Field" layoutX="470.0" layoutY="221.0" text="137000" />
+                        <Label layoutX="14.0" layoutY="18.0" text="Диаметр трубчатого реактора, м" />
+                        <Label layoutX="14.0" layoutY="67.0" text="Длина, м" />
+                        <Label layoutX="14.0" layoutY="112.0" text="Расход потока, л/мин" />
+                        <Label layoutX="14.0" layoutY="158.0" text="Температура смеси, С" />
+                        <Label layoutX="14.0" layoutY="208.0" text="Входная концентрация А, моль/л" />
+                        <Label layoutX="470.0" layoutY="11.0" text="Входная концентрация А, моль/л" />
+                        <Label layoutX="470.0" layoutY="60.0" text="К1, л/(моль*мин)" />
+                        <Label layoutX="470.0" layoutY="111.0" text="К2, л/(моль*мин)" />
+                        <Label layoutX="469.0" layoutY="158.0" text="Энергия активации 1, Дж/моль" />
+                        <Label layoutX="470.0" layoutY="208.0" text="Энергия активации 2, Дж/моль" />
+                        <Button layoutX="421.0" layoutY="443.0" mnemonicParsing="false" onAction="#onClickCalculate" text="Расчет" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane fx:id="graphCaPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
