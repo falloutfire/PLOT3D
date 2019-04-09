@@ -422,7 +422,7 @@ class MainLayoutController {
                 ColorMapRainbowNoBorder(),
                 surface.bounds.zmax.toDouble(),
                 surface.bounds.zmax.toDouble(),
-                Color(1f, 1f, 1f, 1f)
+                Color(1f, 1f, 1f, .5f)
             )
         surface.colorMapper = myColorMapper
         surface.faceDisplayed = true
