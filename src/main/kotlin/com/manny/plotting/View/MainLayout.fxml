@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manny.plotting.Controller.MainLayoutController">
+<AnchorPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manny.plotting.Controller.MainLayoutController">
     <children>
-        <TabPane prefHeight="650.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="650.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Входные параметры">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="800.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="621.0" prefWidth="1000.0">
                             <children>
                                 <TextField fx:id="diameterField" layoutX="98.0" layoutY="90.0" prefHeight="25.0" prefWidth="43.0" text="1" />
                                 <TextField fx:id="lengthField" layoutX="98.0" layoutY="55.0" prefHeight="25.0" prefWidth="44.0" text="300" />
@@ -25,10 +25,10 @@
                                 <TextField fx:id="tempField" layoutX="255.0" layoutY="265.0" prefWidth="126.0" text="200" />
                                 <TextField fx:id="concAField" layoutX="255.0" layoutY="195.0" prefWidth="126.0" text="1" />
                                 <TextField fx:id="concBField" layoutX="255.0" layoutY="230.0" prefWidth="126.0" text="1" />
-                                <TextField fx:id="k1Field" layoutX="255.0" layoutY="335.0" prefWidth="126.0" text="5530" />
-                                <TextField fx:id="k2Field" layoutX="255.0" layoutY="370.0" prefWidth="126.0" text="20000000000000" />
-                                <TextField fx:id="activ1Field" layoutX="255.0" layoutY="405.0" prefWidth="126.0" text="48650" />
-                                <TextField fx:id="activ2Field" layoutX="255.0" layoutY="440.0" prefWidth="126.0" text="137000" />
+                                <TextField fx:id="k1Field" layoutX="381.0" layoutY="334.0" prefWidth="126.0" text="5530" />
+                                <TextField fx:id="k2Field" layoutX="381.0" layoutY="374.0" prefWidth="126.0" text="20000000000000" />
+                                <TextField fx:id="activ1Field" layoutX="381.0" layoutY="409.0" prefWidth="126.0" text="48650" />
+                                <TextField fx:id="activ2Field" layoutX="381.0" layoutY="440.0" prefWidth="126.0" text="137000" />
                                 <Label layoutX="27.0" layoutY="95.0" text="Диаметр">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
@@ -59,28 +59,28 @@
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="27.0" layoutY="340.0" text="К1, л/(моль*мин)">
+                                <Label layoutX="27.0" layoutY="340.0" text="Предэкспоненциальный множитель k01, л/(моль*мин)">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="27.0" layoutY="375.0" text="К2, л/(моль*мин)">
+                                <Label layoutX="27.0" layoutY="375.0" text="Предэкспоненциальный множитель k02, 1/мин">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="27.0" layoutY="410.0" text="Энергия активации 1, Дж/моль">
+                                <Label layoutX="27.0" layoutY="410.0" text="Энергия активации 1 реакции, Дж/моль">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="27.0" layoutY="445.0" text="Энергия активации 2, Дж/моль">
+                                <Label layoutX="27.0" layoutY="445.0" text="Энергия активации 2 реакции, Дж/моль">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Button layoutX="734.0" layoutY="545.0" mnemonicParsing="false" onAction="#onClickCalculate" text="Расчет" />
-                                <Label layoutX="27.0" layoutY="28.0" text="Геометричсекие параметры канала">
+                                <Button layoutX="890.0" layoutY="551.0" mnemonicParsing="false" onAction="#onClickCalculate" text="Расчет" />
+                                <Label layoutX="27.0" layoutY="28.0" text="Геометрические параметры реактора">
                                     <font>
                                         <Font name="Georgia Bold" size="13.0" />
                                     </font>
@@ -95,7 +95,7 @@
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="27.0" layoutY="129.0" text="Технологичекие параметры процесса">
+                                <Label layoutX="27.0" layoutY="129.0" text="Технологические параметры процесса">
                                     <font>
                                         <Font name="Georgia Bold" size="13.0" />
                                     </font>
@@ -105,7 +105,7 @@
                                         <Font name="Georgia Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="27.0" layoutY="480.0" text="Параметры решения уравнения модели">
+                                <Label layoutX="27.0" layoutY="480.0" text="Параметры метода решения уравнений модели">
                                     <font>
                                         <Font name="Georgia Bold" size="13.0" />
                                     </font>
@@ -128,90 +128,92 @@
                                 <TextField fx:id="maxSigmaField" layoutX="255.0" layoutY="580.0" prefWidth="126.0" text="1.3" />
                                 <TextField fx:id="kurantField" layoutX="255.0" layoutY="545.0" prefHeight="25.0" prefWidth="126.0" text="0.95" />
                                 <TextField fx:id="firstStepField" layoutX="255.0" layoutY="510.0" prefWidth="126.0" text="2" />
-                                <Separator layoutX="400.0" layoutY="3.0" orientation="VERTICAL" prefHeight="650.0" prefWidth="3.0" />
-                                <Label layoutX="427.0" layoutY="28.0" text="Результы расчёта">
+                                <Separator layoutX="560.0" layoutY="10.0" orientation="VERTICAL" prefHeight="650.0" prefWidth="3.0" />
+                                <Label layoutX="583.0" layoutY="34.0" text="Результы расчёта">
                                     <font>
                                         <Font name="Georgia Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="380.0" text="Число шагов по времени">
+                                <Label layoutX="583.0" layoutY="386.0" text="Число шагов по времени">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="345.0" text="Число шагов по длине раектора">
+                                <Label layoutX="583.0" layoutY="351.0" text="Число шагов по длине реактора">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="415.0" text="Приведённая погрешност, %">
+                                <Label layoutX="583.0" layoutY="421.0" text="Приведённая погрешность, %">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="310.0" text="Шаг сетки по времени, мин">
+                                <Label layoutX="583.0" layoutY="316.0" text="Шаг сетки по времени, мин">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="275.0" text="Шаг сетки по длине реактора, м">
+                                <Label layoutX="583.0" layoutY="281.0" text="Шаг сетки по длине реактора, м">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="240.0" text="Макс. концентрация компонента С, моль/л">
+                                <Label layoutX="583.0" layoutY="246.0" text="Макс. концентрация компонента С, моль/л">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="205.0" text="Константа скорости второй реакции, 1/мин">
+                                <Label layoutX="583.0" layoutY="211.0" text="Константа скорости второй реакции, 1/мин">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="135.0" text="Время моделирвоания, мин">
+                                <Label layoutX="583.0" layoutY="141.0" text="Время моделирования, мин">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="100.0" text="Средняя линейная скорость потока, м/мин">
+                                <Label layoutX="583.0" layoutY="106.0" text="Средняя линейная скорость потока, м/мин">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="170.0" text="Константа скорости первой реакци, 1/мин">
+                                <Label layoutX="583.0" layoutY="176.0" text="Константа скорости первой реакци, 1/мин">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="65.0" text="Площадь поперечного сечения, м^2">
+                                <Label layoutX="583.0" layoutY="71.0" text="Площадь поперечного сечения, м^2">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="450.0" text="Абсолютная погрешность, моль/л">
+                                <Label layoutX="583.0" layoutY="456.0" text="Абсолютная погрешность, моль/л">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="427.0" layoutY="550.0" text="Время расчёта, с">
+                                <Label layoutX="583.0" layoutY="556.0" text="Время расчёта, с">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="areaField" editable="false" layoutX="710.0" layoutY="60.0" prefHeight="25.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="nField" editable="false" layoutX="710.0" layoutY="375.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="sigmaField" editable="false" layoutX="710.0" layoutY="410.0" prefHeight="25.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="absolutSigmaField" editable="false" layoutX="710.0" layoutY="445.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="mField" editable="false" layoutX="710.0" layoutY="340.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="dtField" editable="false" layoutX="710.0" layoutY="305.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="dxField" editable="false" layoutX="710.0" layoutY="270.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="maxConField" editable="false" layoutX="710.0" layoutY="235.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="const1Field" editable="false" layoutX="710.0" layoutY="165.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="modelTimeField" editable="false" layoutX="710.0" layoutY="130.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="const2Field" editable="false" layoutX="710.0" layoutY="200.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="speedField" editable="false" layoutX="710.0" layoutY="95.0" prefWidth="100.0" text="0" />
-                                <TextField fx:id="timeField" editable="false" layoutX="557.0" layoutY="545.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="areaField" editable="false" layoutX="866.0" layoutY="66.0" prefHeight="25.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="nField" editable="false" layoutX="866.0" layoutY="381.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="sigmaField" editable="false" layoutX="866.0" layoutY="416.0" prefHeight="25.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="absolutSigmaField" editable="false" layoutX="866.0" layoutY="451.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="mField" editable="false" layoutX="866.0" layoutY="346.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="dtField" editable="false" layoutX="866.0" layoutY="311.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="dxField" editable="false" layoutX="866.0" layoutY="276.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="maxConField" editable="false" layoutX="866.0" layoutY="241.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="const1Field" editable="false" layoutX="866.0" layoutY="171.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="modelTimeField" editable="false" layoutX="866.0" layoutY="136.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="const2Field" editable="false" layoutX="866.0" layoutY="206.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="speedField" editable="false" layoutX="866.0" layoutY="101.0" prefWidth="100.0" text="0" />
+                                <TextField fx:id="timeField" editable="false" layoutX="713.0" layoutY="551.0" prefWidth="100.0" text="0" />
+                        <TextField fx:id="qmaxField" layoutX="396.0" layoutY="544.0" prefHeight="25.0" prefWidth="124.0" text="10" />
+                        <Label layoutX="388.0" layoutY="507.0" text="Максимальное число шагов &#10;делений сетки пополам" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -221,7 +223,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <HBox fx:id="graph3DCAPane" alignment="CENTER" layoutX="1.0" prefHeight="617.0" prefWidth="849.0" />
+                                <HBox fx:id="graph3DCAPane" alignment="CENTER" layoutX="1.0" prefHeight="617.0" prefWidth="1000.0" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -230,7 +232,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <HBox fx:id="graph3DCBPane" alignment="CENTER" layoutX="1.0" prefHeight="619.0" prefWidth="851.0" />
+                                <HBox fx:id="graph3DCBPane" alignment="CENTER" layoutX="1.0" prefHeight="619.0" prefWidth="1000.0" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -239,7 +241,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <HBox fx:id="graph3DCCPane" alignment="CENTER" layoutX="1.0" prefHeight="618.0" prefWidth="849.0" />
+                                <HBox fx:id="graph3DCCPane" alignment="CENTER" layoutX="1.0" prefHeight="618.0" prefWidth="1000.0" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -248,12 +250,21 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="caTableView" layoutX="66.0" layoutY="21.0" prefHeight="170.0" prefWidth="749.0" />
-                                <TableView fx:id="cbTableView" layoutX="66.0" layoutY="221.0" prefHeight="170.0" prefWidth="749.0" />
-                                <TableView fx:id="ccTableView" layoutX="67.0" layoutY="421.0" prefHeight="170.0" prefWidth="749.0" />
-                                <Label layoutX="19.0" layoutY="109.0" rotate="270.0" text="Время, мин" />
-                                <Label layoutX="19.0" layoutY="301.0" rotate="270.0" text="Время, мин" />
-                                <Label layoutX="18.0" layoutY="498.0" rotate="270.0" text="Время, мин" />
+                                <TableView fx:id="caTableView" layoutX="66.0" layoutY="21.0" prefHeight="170.0" prefWidth="915.0" />
+                                <TableView fx:id="cbTableView" layoutX="66.0" layoutY="221.0" prefHeight="170.0" prefWidth="915.0" />
+                                <TableView fx:id="ccTableView" layoutX="67.0" layoutY="421.0" prefHeight="170.0" prefWidth="915.0" />
+                                <Label layoutX="19.0" layoutY="109.0" rotate="270.0" text="Время, мин">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Label>
+                                <Label layoutX="19.0" layoutY="301.0" rotate="270.0" text="Время, мин">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Label>
+                                <Label layoutX="18.0" layoutY="498.0" rotate="270.0" text="Время, мин">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Label>
                                 <Label layoutX="67.0" layoutY="7.0" text="Зависимость концентрации компонента А от координаты и времени" />
                                 <Label layoutX="67.0" layoutY="206.0" text="Зависимость концентрации компонента B от координаты и времени" />
                                 <Label layoutX="67.0" layoutY="406.0" text="Зависимость концентрации компонента C от координаты и времени" />

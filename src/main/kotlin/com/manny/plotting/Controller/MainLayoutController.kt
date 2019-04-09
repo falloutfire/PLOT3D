@@ -15,6 +15,9 @@ import javafx.util.Callback
 import org.jzy3d.chart.AWTChart
 import org.jzy3d.colors.Color
 import org.jzy3d.colors.ColorMapper
+import org.jzy3d.colors.colormaps.ColorMapGrayscale
+import org.jzy3d.colors.colormaps.ColorMapRBG
+import org.jzy3d.colors.colormaps.ColorMapRainbow
 import org.jzy3d.colors.colormaps.ColorMapRainbowNoBorder
 import org.jzy3d.javafx.JavaFXChartFactory
 import org.jzy3d.maths.Range
@@ -63,6 +66,7 @@ class MainLayoutController {
     lateinit var const2Field: TextField
     lateinit var speedField: TextField
     lateinit var timeField: TextField
+    lateinit var qmaxField: TextField
 
     private var imageViewCA: ImageView? = null
     private var imageViewCB: ImageView? = null
@@ -112,12 +116,13 @@ class MainLayoutController {
         Ea2: Double,
         x0: Double,
         Ku: Double,
-        e_max: Double
+        e_max: Double,
+        q_max: Double
     ): HashMap<String, Any> {
         /*val x0 = 2.0
         val Ku = 0.95
         val e_max = 1.3*/
-        val q_max = 10
+        //val q_max = 10
 
         val S = (Math.PI * Math.pow(D, 2.0)) / 4.0
         val u = Q / S * 0.001
@@ -145,12 +150,8 @@ class MainLayoutController {
         var max = 0.0
         var ea = 0.0
 
-        var e_out = 0.0
-        var ea_out = 0.0
 
         do {
-            e_out = e
-            ea_out = ea
             CA.clear()
             CB.clear()
             CC.clear()
@@ -277,10 +278,9 @@ class MainLayoutController {
             var x0 = firstStepField.text.toDouble()
             var Ku = kurantField.text.toDouble()
             var e_max = maxSigmaField.text.toDouble()
+            val q_max = qmaxField.text.toDouble()
 
-            val q_max = 1
-
-            var map = calculate(diameter, length, rate, concA, concB, temp, k1, activ1, k2, activ2, x0, Ku, e_max)
+            var map = calculate(diameter, length, rate, concA, concB, temp, k1, activ1, k2, activ2, x0, Ku, e_max, q_max)
 
             /*val yAxis = NumberAxis()
             val xAxis = NumberAxis()
@@ -360,7 +360,7 @@ class MainLayoutController {
             dxField.text = dfout.format(map["deltaX"])
             maxConField.text = dfout.format(map["CCmax"])
             const1Field.text = dfout.format(map["k1"])
-            modelTimeField.text = dfout.format(map["tR"])
+            modelTimeField.text = dfout.format(map["Sigma"])
             const2Field.text = dfout.format(map["k2"])
             speedField.text = dfout.format(map["u"])
             timeField.text = ((System.currentTimeMillis() - timeRas)/1000).toString()
@@ -368,6 +368,7 @@ class MainLayoutController {
             val alert = Alert(Alert.AlertType.ERROR)
             alert.headerText = "Нарушено условие устойчивости."
             alert.contentText = "Сеточное число Куранта должно быть больше 0 и меньше 1"
+            alert.showAndWait()
         }
 
 
@@ -418,16 +419,14 @@ class MainLayoutController {
         )
         var myColorMapper =
             ColorMapper(
-                ColorMapRainbowNoBorder()
-                /*ColorMapRainbow()*/,
-                surface.bounds.zmin.toDouble(),
+                ColorMapRainbowNoBorder(),
                 surface.bounds.zmax.toDouble(),
-                Color(1f, 1f, 1f, .5f)
+                surface.bounds.zmax.toDouble(),
+                Color(1f, 1f, 1f, 1f)
             )
         surface.colorMapper = myColorMapper
         surface.faceDisplayed = true
-        surface.wireframeDisplayed = false
-        //surface.setWireframeDisplayed(true);
+        surface.wireframeDisplayed = true
         surface.wireframeColor = Color.BLACK
 
         /*var counter = 0
@@ -457,8 +456,8 @@ class MainLayoutController {
         //chart.scene.graph.add(scatter)
         chart.scene.graph.add(surface)
         chart.axeLayout.xAxeLabel = "Time, min"
-        chart.axeLayout.yAxeLabel = "Coordinate, m"
-        chart.axeLayout.zAxeLabel = "Concentration, mol/L"
+        chart.axeLayout.yAxeLabel = "Length, m"
+        chart.axeLayout.zAxeLabel = "Concentration, Mol/L"
         return chart
     }
 
@@ -477,7 +476,17 @@ class MainLayoutController {
         columnsList: List<String>,
         columns: ObservableList<TableColumn<ObservableList<String>, *>>
     ) {
-        for (i in 0 until columnsList.size step 10) {
+
+        val col0 = TableColumn<ObservableList<String>, String>(columnsList[0])
+        col0.cellValueFactory =
+            Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>> { param ->
+                SimpleStringProperty(
+                    param.value[0].toString()
+                )
+            }
+        columns.addAll(col0)
+
+        for (i in 1 until columnsList.size step 10) {
             val col = TableColumn<ObservableList<String>, String>(columnsList[i])
             col.cellValueFactory =
                 Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>> { param ->
