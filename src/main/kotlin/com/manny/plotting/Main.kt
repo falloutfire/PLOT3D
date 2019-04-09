@@ -10,7 +10,7 @@ import javafx.scene.layout.BorderPane
 import javafx.stage.Stage
 import java.io.IOException
 
-class Main: Application() {
+class Main : Application() {
 
     var primaryStage: Stage? = null
     var rootLoader: RootLayoutController? = null
