@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3d1f5a28-9bf3-4236-aae1-fe7b1bf80e0e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/View/MainLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/View/MainLayout.fxml" afterDir="false" />
     </list>
@@ -74,12 +73,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="404" column="54" selection-start-line="404" selection-start-column="54" selection-end-line="404" selection-end-column="54" />
+            <state relative-caret-position="74">
+              <caret line="501" column="38" lean-forward="true" selection-start-line="501" selection-start-column="38" selection-end-line="501" selection-end-column="38" />
               <folding>
                 <element signature="n#!!block;n#initialize#0;n#!!block;n#MainLayoutController#0" />
                 <element signature="n#!!block;n#setPattern#0;n#!!block;n#MainLayoutController#0" />
-                <element signature="n#!!block;n#getChart#0;n#!!block;n#MainLayoutController#0" />
               </folding>
             </state>
           </provider>
@@ -205,7 +203,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554901447343" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554905167876" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ITTechnology-master" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -271,7 +269,7 @@
       <workItem from="1554799244368" duration="4543000" />
       <workItem from="1554811896689" duration="9029000" />
       <workItem from="1554883872107" duration="1849000" />
-      <workItem from="1554897556027" duration="3814000" />
+      <workItem from="1554897556027" duration="7550000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1554413396722</created>
@@ -301,11 +299,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554831342275</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix graph">
+      <created>1554901546163</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1554901546163</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86065000" />
+    <option name="totallyTimeSpent" value="89801000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1366" height="738" extended-state="6" />
@@ -397,53 +402,39 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt</url>
-          <line>437</line>
+          <line>446</line>
           <properties />
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt</url>
-          <line>438</line>
+          <line>447</line>
           <properties />
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt</url>
-          <line>444</line>
+          <line>453</line>
           <properties />
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt</url>
-          <line>430</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt</url>
-          <line>432</line>
+          <line>441</line>
           <properties />
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt</url>
-          <line>333</line>
-          <properties />
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt</url>
-          <line>347</line>
+          <line>352</line>
           <properties />
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt</url>
-          <line>338</line>
+          <line>344</line>
           <properties />
-          <option name="timeStamp" value="58" />
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -592,12 +583,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/manny/plotting/Controller/MainLayoutController.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="404" column="54" selection-start-line="404" selection-start-column="54" selection-end-line="404" selection-end-column="54" />
+        <state relative-caret-position="74">
+          <caret line="501" column="38" lean-forward="true" selection-start-line="501" selection-start-column="38" selection-end-line="501" selection-end-column="38" />
           <folding>
             <element signature="n#!!block;n#initialize#0;n#!!block;n#MainLayoutController#0" />
             <element signature="n#!!block;n#setPattern#0;n#!!block;n#MainLayoutController#0" />
-            <element signature="n#!!block;n#getChart#0;n#!!block;n#MainLayoutController#0" />
           </folding>
         </state>
       </provider>

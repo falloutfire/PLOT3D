@@ -338,12 +338,17 @@ class MainLayoutController {
                 val coordTableArray = ArrayList<String>()
                 coordTableArray.add("Координата, м")
 
-                val count = Math.round(Math.pow(2.0, map["q"] as Double)).toInt()
+                val count = Math.round(
+                    Math.pow(2.0, (map["q"] as Double)-1.0)).toInt()
 
                 //coord.map { coordTableArray.add(df.format(it)) }
                 for (i in 0 until coord.size step count) {
                     coordTableArray.add(df.format(coord[i]))
                 }
+
+                caTableView.columns.clear()
+                cbTableView.columns.clear()
+                ccTableView.columns.clear()
 
                 setCellFactoryTable(coordTableArray, caTableView.columns)
                 val aArrayTable = adderValues(time, cA, count)
@@ -402,7 +407,7 @@ class MainLayoutController {
                 const2Field.text = dfout.format(map["k2"])
                 speedField.text = dfout.format(map["u"])
                 timeField.text = ((System.currentTimeMillis() - timeRas) / 1000).toString()
-                qCountField.text = dfout.format(map["q"])
+                qCountField.text = dfout.format((map["q"] as Double)-1.0)
                 delay(600)
 
             }
@@ -422,14 +427,18 @@ class MainLayoutController {
         time: ArrayList<Double>,
         conc: ArrayList<ArrayList<Double>>, q: Int
     ): ObservableList<ObservableList<String>> {
-        val df = DecimalFormat("#.#")
+        val df = DecimalFormat("#.###")
         df.roundingMode = RoundingMode.CEILING
         var array: ObservableList<ObservableList<String>> = FXCollections.observableArrayList()
         for (i in 0 until time.size step q) {
             var line: ObservableList<String> = FXCollections.observableArrayList()
             line.add(df.format(time[i]))
-            conc[i].map { line.add(df.format(it)) }
-            line.add("")
+            for (j in 0 until conc[0].size step q){
+                line.add(df.format(conc[i][j]))
+            }
+            line.add("   ")
+            line.add("___")
+            line.add("___")
             array.add(line)
         }
         return array
@@ -502,7 +511,7 @@ class MainLayoutController {
         chart.scene.graph.add(surface)
         chart.axeLayout.xAxeLabel = "Time, min"
         chart.axeLayout.yAxeLabel = "Length, m"
-        chart.axeLayout.zAxeLabel = "Concentration, Mol/L"
+        chart.axeLayout.zAxeLabel = "Concentration, mol/l"
         return chart
     }
 
@@ -531,7 +540,7 @@ class MainLayoutController {
             }
         columns.addAll(col0)
 
-        for (i in 1 until columnsList.size /*step q*/) {
+        for (i in 1 until columnsList.size ) {
             val col = TableColumn<ObservableList<String>, String>(columnsList[i])
             col.cellValueFactory =
                 Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>> { param ->
@@ -550,6 +559,22 @@ class MainLayoutController {
                 )
             }
         columns.addAll(colEnd)
+        val colEnd1 = TableColumn<ObservableList<String>, String>()
+        colEnd1.cellValueFactory =
+            Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>> { param ->
+                SimpleStringProperty(
+                    /*param.value[0].toString()*/ "__"
+                )
+            }
+        columns.addAll(colEnd1)
+        val colEnd2 = TableColumn<ObservableList<String>, String>()
+        colEnd2.cellValueFactory =
+            Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>> { param ->
+                SimpleStringProperty(
+                    /*param.value[0].toString()*/ "__"
+                )
+            }
+        columns.addAll(colEnd2)
     }
 }
 

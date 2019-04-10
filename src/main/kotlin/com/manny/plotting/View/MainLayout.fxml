@@ -169,7 +169,7 @@
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="583.0" layoutY="211.0" text="Константа скорости второй реакции, 1/мин">
+                                <Label layoutX="583.0" layoutY="211.0" text="Константа скорости 2 реакции, 1/мин">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
@@ -184,7 +184,7 @@
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="583.0" layoutY="176.0" text="Константа скорости первой реакци, л/(моль*мин)">
+                                <Label layoutX="583.0" layoutY="176.0" text="Константа скорости 1 реакции, л/(моль*мин)">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
@@ -264,18 +264,18 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="caTableView" layoutX="66.0" layoutY="21.0" prefHeight="170.0" prefWidth="915.0" />
-                                <TableView fx:id="cbTableView" layoutX="66.0" layoutY="221.0" prefHeight="170.0" prefWidth="915.0" />
-                                <TableView fx:id="ccTableView" layoutX="67.0" layoutY="421.0" prefHeight="170.0" prefWidth="915.0" />
-                                <Label layoutX="19.0" layoutY="109.0" rotate="270.0" text="Время, мин">
+                                <TableView fx:id="caTableView" layoutX="32.0" layoutY="21.0" prefHeight="170.0" prefWidth="949.0" />
+                                <TableView fx:id="cbTableView" layoutX="32.0" layoutY="221.0" prefHeight="170.0" prefWidth="949.0" />
+                                <TableView fx:id="ccTableView" layoutX="32.0" layoutY="421.0" prefHeight="170.0" prefWidth="950.0" />
+                                <Label layoutX="-16.0" layoutY="106.0" rotate="270.0" text="Время, мин">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Label>
-                                <Label layoutX="19.0" layoutY="301.0" rotate="270.0" text="Время, мин">
+                                <Label layoutX="-16.0" layoutY="299.0" rotate="270.0" text="Время, мин">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Label>
-                                <Label layoutX="18.0" layoutY="498.0" rotate="270.0" text="Время, мин">
+                                <Label layoutX="-16.0" layoutY="499.0" rotate="270.0" text="Время, мин">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Label>
