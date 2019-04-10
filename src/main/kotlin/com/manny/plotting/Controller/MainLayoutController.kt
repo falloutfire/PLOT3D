@@ -5,13 +5,16 @@ import javafx.beans.property.SimpleStringProperty
 import javafx.beans.value.ObservableValue
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
-import javafx.scene.control.Alert
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
-import javafx.scene.control.TextField
+import javafx.fxml.FXMLLoader
+import javafx.scene.Scene
+import javafx.scene.control.*
 import javafx.scene.image.ImageView
+import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.HBox
+import javafx.stage.Stage
+import javafx.stage.StageStyle
 import javafx.util.Callback
+import kotlinx.coroutines.*
 import org.jzy3d.chart.AWTChart
 import org.jzy3d.colors.Color
 import org.jzy3d.colors.ColorMapper
@@ -24,6 +27,7 @@ import org.jzy3d.maths.Range
 import org.jzy3d.plot3d.builder.concrete.OrthonormalTessellator
 import org.jzy3d.plot3d.primitives.Shape
 import org.jzy3d.plot3d.rendering.canvas.Quality
+import java.io.Serializable
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.util.regex.Pattern
@@ -32,6 +36,9 @@ import kotlin.math.absoluteValue
 
 class MainLayoutController {
 
+    lateinit var mainPane: AnchorPane
+    lateinit var calcPane: AnchorPane
+    lateinit var tabPane: TabPane
     lateinit var graph3DCCPane: HBox
     lateinit var graph3DCBPane: HBox
     lateinit var graph3DCAPane: HBox
@@ -48,6 +55,7 @@ class MainLayoutController {
     lateinit var firstStepField: TextField
     lateinit var kurantField: TextField
     lateinit var maxSigmaField: TextField
+    lateinit var qCountField: TextField
     lateinit var caTableView: TableView<ObservableList<String>>
     lateinit var cbTableView: TableView<ObservableList<String>>
     lateinit var ccTableView: TableView<ObservableList<String>>
@@ -103,7 +111,7 @@ class MainLayoutController {
         }
     }
 
-    fun calculate(
+    suspend fun calculate(
         D: Double,
         L: Double,
         Q: Double,
@@ -118,12 +126,13 @@ class MainLayoutController {
         Ku: Double,
         e_max: Double,
         q_max: Double
-    ): HashMap<String, Any> {
+    ): HashMap<String, Serializable> = withContext(Dispatchers.Default){
         /*val x0 = 2.0
         val Ku = 0.95
         val e_max = 1.3*/
         //val q_max = 10
 
+        var countQ = 0
         val S = (Math.PI * Math.pow(D, 2.0)) / 4.0
         val u = Q / S * 0.001
         val tR = L / u
@@ -235,9 +244,10 @@ class MainLayoutController {
             q++
 
 
+
         } while (e >= e_max && q <= q_max)
 
-        return hashMapOf(
+        return@withContext hashMapOf(
             "s" to S,
             "u" to u,
             "tR" to tR,
@@ -263,26 +273,49 @@ class MainLayoutController {
     fun onClickCalculate() {
 
         if (kurantField.text.toDouble() <= 1 && kurantField.text.toDouble() > 0) {
-            val timeRas = System.currentTimeMillis()
-            val diameter = diameterField.text.toDouble()
-            val length = lengthField.text.toDouble()
-            var activ2 = activ2Field.text.toDouble()
-            var activ1 = activ1Field.text.toDouble()
-            var k2 = k2Field.text.toDouble()
-            var k1 = k1Field.text.toDouble()
-            var concA = concAField.text.toDouble()
-            var concB = concBField.text.toDouble()
-            var temp = tempField.text.toDouble()
-            var rate = rateField.text.toDouble()
 
-            var x0 = firstStepField.text.toDouble()
-            var Ku = kurantField.text.toDouble()
-            var e_max = maxSigmaField.text.toDouble()
-            val q_max = qmaxField.text.toDouble()
 
-            var map = calculate(diameter, length, rate, concA, concB, temp, k1, activ1, k2, activ2, x0, Ku, e_max, q_max)
+            tabPane.isVisible = false
+            calcPane.isVisible = true
+            GlobalScope.launch(Dispatchers.Main) {
 
-            /*val yAxis = NumberAxis()
+                val timeRas = System.currentTimeMillis()
+                val diameter = diameterField.text.toDouble()
+                val length = lengthField.text.toDouble()
+                val activ2 = activ2Field.text.toDouble()
+                val activ1 = activ1Field.text.toDouble()
+                val k2 = k2Field.text.toDouble()
+                val k1 = k1Field.text.toDouble()
+                val concA = concAField.text.toDouble()
+                val concB = concBField.text.toDouble()
+                val temp = tempField.text.toDouble()
+                val rate = rateField.text.toDouble()
+
+                val x0 = firstStepField.text.toDouble()
+                val Ku = kurantField.text.toDouble()
+                val e_max = maxSigmaField.text.toDouble()
+                val q_max = qmaxField.text.toDouble()
+
+                val map = runBlocking {
+                    calculate(
+                        diameter,
+                        length,
+                        rate,
+                        concA,
+                        concB,
+                        temp,
+                        k1,
+                        activ1,
+                        k2,
+                        activ2,
+                        x0,
+                        Ku,
+                        e_max,
+                        q_max
+                    )
+                }
+
+                /*val yAxis = NumberAxis()
             val xAxis = NumberAxis()
             var chart2dTemp = LineChart(xAxis, yAxis)
 
@@ -292,34 +325,39 @@ class MainLayoutController {
             yAxis.label = "Концентрация СС"
             val seria1 = XYChart.Series<Number, Number>()*/
 
-            val cA = map["CA"] as ArrayList<ArrayList<Double>>
-            val cB = map["CB"] as ArrayList<ArrayList<Double>>
-            val cC = map["CC"] as ArrayList<ArrayList<Double>>
-            val time = map["t"] as ArrayList<Double>
-            val coord = map["x"] as ArrayList<Double>
+                val cA = map["CA"] as ArrayList<ArrayList<Double>>
+                val cB = map["CB"] as ArrayList<ArrayList<Double>>
+                val cC = map["CC"] as ArrayList<ArrayList<Double>>
+                val time = map["t"] as ArrayList<Double>
+                val coord = map["x"] as ArrayList<Double>
 
-            val df = DecimalFormat("#.##")
-            df.roundingMode = RoundingMode.CEILING
-            val dfout = DecimalFormat("#.###")
-            dfout.roundingMode = RoundingMode.CEILING
-            val coordTableArray = ArrayList<String>()
-            coordTableArray.add("Координата, м")
+                val df = DecimalFormat("#.##")
+                df.roundingMode = RoundingMode.CEILING
+                val dfout = DecimalFormat("#.###")
+                dfout.roundingMode = RoundingMode.CEILING
+                val coordTableArray = ArrayList<String>()
+                coordTableArray.add("Координата, м")
 
-            coord.map { coordTableArray.add(df.format(it)) }
+                val count = Math.round(Math.pow(2.0, map["q"] as Double)).toInt()
 
-            setCellFactoryTable(coordTableArray, caTableView.columns)
-            val aArrayTable = adderValues(time, cA)
-            caTableView.items = aArrayTable
+                //coord.map { coordTableArray.add(df.format(it)) }
+                for (i in 0 until coord.size step count) {
+                    coordTableArray.add(df.format(coord[i]))
+                }
 
-            setCellFactoryTable(coordTableArray, cbTableView.columns)
-            val bArrayTable = adderValues(time, cB)
-            cbTableView.items = bArrayTable
+                setCellFactoryTable(coordTableArray, caTableView.columns)
+                val aArrayTable = adderValues(time, cA, count)
+                caTableView.items = aArrayTable
 
-            setCellFactoryTable(coordTableArray, ccTableView.columns)
-            val cArrayTable = adderValues(time, cC)
-            ccTableView.items = cArrayTable
+                setCellFactoryTable(coordTableArray, cbTableView.columns)
+                val bArrayTable = adderValues(time, cB, count)
+                cbTableView.items = bArrayTable
 
-            /* for (i in 0 until cC.size) {
+                setCellFactoryTable(coordTableArray, ccTableView.columns)
+                val cArrayTable = adderValues(time, cC, count)
+                ccTableView.items = cArrayTable
+
+                /* for (i in 0 until cC.size) {
                  seria1.data.add(
                      XYChart.Data(
                          time[i] as Number,
@@ -334,36 +372,42 @@ class MainLayoutController {
              graphCaPane.children.add(chart2dTemp)*/
 
 
-            factory = JavaFXChartFactory()
-            chartCA = getChart(factory!!, cA, time, coord)
-            chartCB = getChart(factory!!, cB, time, coord)
-            chartCC = getChart(factory!!, cC, time, coord)
+                factory = JavaFXChartFactory()
+                chartCA = getChart(factory!!, cA, time, coord)
+                chartCB = getChart(factory!!, cB, time, coord)
+                chartCC = getChart(factory!!, cC, time, coord)
 
-            imageViewCA = factory!!.bindImageView(chartCA)
-            imageViewCB = factory!!.bindImageView(chartCB)
-            imageViewCC = factory!!.bindImageView(chartCC)
+                imageViewCA = factory!!.bindImageView(chartCA)
+                imageViewCB = factory!!.bindImageView(chartCB)
+                imageViewCC = factory!!.bindImageView(chartCC)
 
-            graph3DCAPane.children.clear()
-            graph3DCBPane.children.clear()
-            graph3DCCPane.children.clear()
+                graph3DCAPane.children.clear()
+                graph3DCBPane.children.clear()
+                graph3DCCPane.children.clear()
 
-            graph3DCAPane.children.add(imageViewCA)
-            graph3DCBPane.children.add(imageViewCB)
-            graph3DCCPane.children.add(imageViewCC)
+                graph3DCAPane.children.add(imageViewCA)
+                graph3DCBPane.children.add(imageViewCB)
+                graph3DCCPane.children.add(imageViewCC)
 
-            areaField.text = dfout.format(map["s"])
-            nField.text = dfout.format(map["N"])
-            sigmaField.text = dfout.format(map["e"])
-            absolutSigmaField.text = dfout.format(map["ea"])
-            mField.text = dfout.format(map["M"])
-            dtField.text = dfout.format(map["deltaT"])
-            dxField.text = dfout.format(map["deltaX"])
-            maxConField.text = dfout.format(map["CCmax"])
-            const1Field.text = dfout.format(map["k1"])
-            modelTimeField.text = dfout.format(map["Sigma"])
-            const2Field.text = dfout.format(map["k2"])
-            speedField.text = dfout.format(map["u"])
-            timeField.text = ((System.currentTimeMillis() - timeRas)/1000).toString()
+                areaField.text = dfout.format(map["s"])
+                nField.text = dfout.format(map["N"])
+                sigmaField.text = dfout.format(map["e"])
+                absolutSigmaField.text = dfout.format(map["ea"])
+                mField.text = dfout.format(map["M"])
+                dtField.text = dfout.format(map["deltaT"])
+                dxField.text = dfout.format(map["deltaX"])
+                maxConField.text = dfout.format(map["CCmax"])
+                const1Field.text = dfout.format(map["k1"])
+                modelTimeField.text = dfout.format(map["Sigma"])
+                const2Field.text = dfout.format(map["k2"])
+                speedField.text = dfout.format(map["u"])
+                timeField.text = ((System.currentTimeMillis() - timeRas) / 1000).toString()
+                qCountField.text = dfout.format(map["q"])
+                delay(600)
+
+            }
+            tabPane.isVisible = true
+            calcPane.isVisible = false
         } else {
             val alert = Alert(Alert.AlertType.ERROR)
             alert.headerText = "Нарушено условие устойчивости."
@@ -376,15 +420,16 @@ class MainLayoutController {
 
     private fun adderValues(
         time: ArrayList<Double>,
-        conc: ArrayList<ArrayList<Double>>
+        conc: ArrayList<ArrayList<Double>>, q: Int
     ): ObservableList<ObservableList<String>> {
         val df = DecimalFormat("#.#")
         df.roundingMode = RoundingMode.CEILING
         var array: ObservableList<ObservableList<String>> = FXCollections.observableArrayList()
-        for (i in 0 until time.size step 10) {
+        for (i in 0 until time.size step q) {
             var line: ObservableList<String> = FXCollections.observableArrayList()
             line.add(df.format(time[i]))
             conc[i].map { line.add(df.format(it)) }
+            line.add("")
             array.add(line)
         }
         return array
@@ -474,7 +519,7 @@ class MainLayoutController {
 
     private fun setCellFactoryTable(
         columnsList: List<String>,
-        columns: ObservableList<TableColumn<ObservableList<String>, *>>
+        columns: ObservableList<TableColumn<ObservableList<String>, *>>/*, q: Int*/
     ) {
 
         val col0 = TableColumn<ObservableList<String>, String>(columnsList[0])
@@ -486,7 +531,7 @@ class MainLayoutController {
             }
         columns.addAll(col0)
 
-        for (i in 1 until columnsList.size step 10) {
+        for (i in 1 until columnsList.size /*step q*/) {
             val col = TableColumn<ObservableList<String>, String>(columnsList[i])
             col.cellValueFactory =
                 Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>> { param ->
@@ -496,6 +541,15 @@ class MainLayoutController {
                 }
             columns.addAll(col)
         }
+
+        val colEnd = TableColumn<ObservableList<String>, String>()
+        colEnd.cellValueFactory =
+            Callback<TableColumn.CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>> { param ->
+                SimpleStringProperty(
+                    /*param.value[0].toString()*/ " "
+                )
+            }
+        columns.addAll(colEnd)
     }
 }
 

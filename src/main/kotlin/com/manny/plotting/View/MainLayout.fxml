@@ -11,9 +11,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manny.plotting.Controller.MainLayoutController">
+<AnchorPane fx:id="mainPane" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manny.plotting.Controller.MainLayoutController">
     <children>
-        <TabPane prefHeight="650.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+      <AnchorPane fx:id="calcPane" prefHeight="650.0" prefWidth="997.0" visible="false">
+         <children>
+            <Label layoutX="461.0" layoutY="317.0" text="РАСЧЕТ..." />
+         </children>
+      </AnchorPane>
+        <TabPane fx:id="tabPane" prefHeight="650.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Входные параметры">
                     <content>
@@ -120,7 +125,7 @@
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="27.0" layoutY="515.0" text="Начальный шаг по длине рактора, м">
+                                <Label layoutX="27.0" layoutY="515.0" text="Начальный шаг по длине реактора, м">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
@@ -129,7 +134,7 @@
                                 <TextField fx:id="kurantField" layoutX="255.0" layoutY="545.0" prefHeight="25.0" prefWidth="126.0" text="0.95" />
                                 <TextField fx:id="firstStepField" layoutX="255.0" layoutY="510.0" prefWidth="126.0" text="2" />
                                 <Separator layoutX="560.0" layoutY="10.0" orientation="VERTICAL" prefHeight="650.0" prefWidth="3.0" />
-                                <Label layoutX="583.0" layoutY="34.0" text="Результы расчёта">
+                                <Label layoutX="583.0" layoutY="34.0" text="Результаты расчёта">
                                     <font>
                                         <Font name="Georgia Bold" size="13.0" />
                                     </font>
@@ -179,7 +184,7 @@
                                         <Font name="Georgia" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="583.0" layoutY="176.0" text="Константа скорости первой реакци, 1/мин">
+                                <Label layoutX="583.0" layoutY="176.0" text="Константа скорости первой реакци, л/(моль*мин)">
                                     <font>
                                         <Font name="Georgia" size="12.0" />
                                     </font>
@@ -213,7 +218,16 @@
                                 <TextField fx:id="speedField" editable="false" layoutX="866.0" layoutY="101.0" prefWidth="100.0" text="0" />
                                 <TextField fx:id="timeField" editable="false" layoutX="713.0" layoutY="551.0" prefWidth="100.0" text="0" />
                         <TextField fx:id="qmaxField" layoutX="396.0" layoutY="544.0" prefHeight="25.0" prefWidth="124.0" text="10" />
-                        <Label layoutX="388.0" layoutY="507.0" text="Максимальное число шагов &#10;делений сетки пополам" />
+                        <Label layoutX="397.0" layoutY="495.0" text="Максимальное число &#10;делений шагов сетки &#10;пополам">
+                           <font>
+                              <Font name="Georgia" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="583.0" layoutY="488.0" text="Число делений шагов сетки пополам">
+                           <font>
+                              <Font name="Georgia" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="qCountField" editable="false" layoutX="866.0" layoutY="483.0" prefWidth="100.0" text="0" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -237,7 +251,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Концетрация компонента С">
+                <Tab text="Концентрация компонента С">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
